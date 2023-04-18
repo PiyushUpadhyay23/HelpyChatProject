@@ -1,111 +1,66 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import "../../CSS/Signup.css";
+import React, { useState } from 'react';
+import '../../CSS/Signup.css';
+import { Link } from 'react-router-dom';
 
-class SignUpForm extends Component {
-  constructor() {
-    super();
+function Signup() {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    phoneNumber: '',
+    agreedToTerms: false
+  });
 
-    this.state = {
-      email: "",
-      password: "",
-      name: "",
-      hasAgreed: false
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    let target = event.target;
-    let value = target.type === "checkbox" ? target.checked : target.value;
-    let name = target.name;
-
-    this.setState({
-      [name]: value
+  const handleInputChange = (event) => {
+    const { name, value, type, checked } = event.target;
+    setFormData({
+      ...formData,
+      [name]: type === 'checkbox' ? checked : value
     });
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-
-    console.log("The form was submitted with the following data:");
-    console.log(this.state);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(formData); // Replace this with your own logic for submitting the form
   }
 
-  render() {
-    return (
-      <div className="formCenter">
-        <form onSubmit={this.handleSubmit} className="formFields">
-          <div className="formField">
-            <label className="formFieldLabel" htmlFor="name">
-              Full Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              className="formFieldInput"
-              placeholder="Enter your full name"
-              name="name"
-              value={this.state.name}
-              onChange={this.handleChange}
-            />
+  return (
+    <div className="signup-container">
+      <div className="signup-image"></div>
+      <div className="signup-form-container">
+        <form onSubmit={handleSubmit}>
+          <h2>Sign Up</h2>
+          <div className="form-group">
+            <label htmlFor="firstName">First Name:</label>
+            <input type="text" name="firstName" value={formData.firstName} onChange={handleInputChange} required />
           </div>
-          <div className="formField">
-            <label className="formFieldLabel" htmlFor="password">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              className="formFieldInput"
-              placeholder="Enter your password"
-              name="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-            />
+          <div className="form-group">
+            <label htmlFor="lastName">Last Name:</label>
+            <input type="text" name="lastName" value={formData.lastName} onChange={handleInputChange} required />
           </div>
-          <div className="formField">
-            <label className="formFieldLabel" htmlFor="email">
-              E-Mail Address
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="formFieldInput"
-              placeholder="Enter your email"
-              name="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
+          <div className="form-group">
+            <label htmlFor="email">Email:</label>
+            <input type="email" name="email" value={formData.email} onChange={handleInputChange} required />
           </div>
-
-          <div className="formField">
-            <label className="formFieldCheckboxLabel">
-              <input
-                className="formFieldCheckbox"
-                type="checkbox"
-                name="hasAgreed"
-                value={this.state.hasAgreed}
-                onChange={this.handleChange}
-              />{" "}
-              I agree all statements in{" "}
-              <a href="null" className="formFieldTermsLink">
-                terms of service
-              </a>
-            </label>
+          <div className="form-group">
+            <label htmlFor="password">Password:</label>
+            <input type="password" name="password" value={formData.password} onChange={handleInputChange} required />
           </div>
-
-          <div className="formField">
-            <button className="formFieldButton">Sign Up</button>{" "}
-            <Link to="/Login" className="formFieldLink">
-              I'm already member
-            </Link>
+          <div className="form-group">
+            <label htmlFor="phoneNumber">Phone Number:</label>
+            <input type="tel" name="phoneNumber" value={formData.phoneNumber} onChange={handleInputChange} required />
           </div>
+          <div className="form-group">
+            <input type="checkbox" name="agreedToTerms" checked={formData.agreedToTerms} onChange={handleInputChange} required />
+            <label htmlFor="agreedToTerms">I agree to the <Link to="/terms">Terms and Privacy Policy</Link></label>
+          </div>
+          <button type="submit">Submit</button>
+          <p>Already have an account? <Link to="/login">Log In</Link></p>
         </form>
       </div>
-    );
-  }
+    </div>
+  );
 }
-export default SignUpForm;
+
+export default Signup;
