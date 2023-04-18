@@ -1,62 +1,111 @@
-import React, { useState } from 'react';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import "../../CSS/Signup.css";
 
-import '../../CSS/Signup.css'
+class SignUpForm extends Component {
+  constructor() {
+    super();
 
-function SignupPage() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+    this.state = {
+      email: "",
+      password: "",
+      name: "",
+      hasAgreed: false
+    };
 
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-  };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
+  handleChange(event) {
+    let target = event.target;
+    let value = target.type === "checkbox" ? target.checked : target.value;
+    let name = target.name;
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
+    this.setState({
+      [name]: value
+    });
+  }
 
-  const handleConfirmPasswordChange = (event) => {
-    setConfirmPassword(event.target.value);
-  };
+  handleSubmit(e) {
+    e.preventDefault();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Here you can make an API call to submit the form data
-  };
+    console.log("The form was submitted with the following data:");
+    console.log(this.state);
+  }
 
-  return (
-    <div className="signupbox">
-      <h1>Register</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Name:
-          <input type="text" value={name} onChange={handleNameChange} />
-        </label>
-        <br />
-        <label>
-          Email:
-          <input type="email" value={email} onChange={handleEmailChange} />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input type="password" value={password} onChange={handlePasswordChange} />
-        </label>
-        <br />
-        <label>
-          Confirm Password:
-          <input type="password" value={confirmPassword} onChange={handleConfirmPasswordChange} />
-        </label>
-        <br />
-        <button type="submit">Sign Up</button>
-      </form>
-    </div>
-  );
+  render() {
+    return (
+      <div className="formCenter">
+        <form onSubmit={this.handleSubmit} className="formFields">
+          <div className="formField">
+            <label className="formFieldLabel" htmlFor="name">
+              Full Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              className="formFieldInput"
+              placeholder="Enter your full name"
+              name="name"
+              value={this.state.name}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="formField">
+            <label className="formFieldLabel" htmlFor="password">
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              className="formFieldInput"
+              placeholder="Enter your password"
+              name="password"
+              value={this.state.password}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="formField">
+            <label className="formFieldLabel" htmlFor="email">
+              E-Mail Address
+            </label>
+            <input
+              type="email"
+              id="email"
+              className="formFieldInput"
+              placeholder="Enter your email"
+              name="email"
+              value={this.state.email}
+              onChange={this.handleChange}
+            />
+          </div>
+
+          <div className="formField">
+            <label className="formFieldCheckboxLabel">
+              <input
+                className="formFieldCheckbox"
+                type="checkbox"
+                name="hasAgreed"
+                value={this.state.hasAgreed}
+                onChange={this.handleChange}
+              />{" "}
+              I agree all statements in{" "}
+              <a href="null" className="formFieldTermsLink">
+                terms of service
+              </a>
+            </label>
+          </div>
+
+          <div className="formField">
+            <button className="formFieldButton">Sign Up</button>{" "}
+            <Link to="/Login" className="formFieldLink">
+              I'm already member
+            </Link>
+          </div>
+        </form>
+      </div>
+    );
+  }
 }
-
-export default SignupPage;
+export default SignUpForm;

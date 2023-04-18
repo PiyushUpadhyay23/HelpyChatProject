@@ -1,51 +1,72 @@
-.loginbox{
+.App {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   height: 100vh;
 }
 
-h1 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-}
-
-form {
+.left {
+  flex: 1;
+  background: linear-gradient(to bottom, #337ab7, #265a88);
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  background-color: #fff;
-  padding: 2rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  align-items: center;
 }
 
-label {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
+.into-img{
+  width: 10rem;
+} */
+/* .left img {
+  width: 200px;
+  height: auto;
+} */
+
+.right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-input {
-  padding: 0.5rem;
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-control {
+  height: 50px;
+  border-radius: 25px;
   border: none;
-  border-bottom: 2px solid #ccc;
-  margin-bottom: 1rem;
-  width: 100%;
-  font-size: 1.2rem;
+  padding: 0 20px;
+  font-size: 16px;
+  background-color: #f7f7f7;
+  box-shadow: inset 3px 3px 5px #cbcbcb, inset -3px -3px 5px #ffffff;
 }
 
-button {
-  padding: 1rem 2rem;
-  background-color: #007bff;
+.btn-primary {
+  height: 50px;
+  border-radius: 25px;
+  border: none;
+  padding: 0 30px;
+  font-size: 16px;
+  background-color: #337ab7;
   color: #fff;
-  border: none;
-  border-radius: 0.5rem;
-  font-size: 1.2rem;
-  cursor: pointer;
+  box-shadow: 3px 3px 5px #cbcbcb, -3px -3px 5px #ffffff;
+  transition: all 0.2s ease-in-out;
 }
 
-button:hover {
-  background-color: #0069d9;
+.btn-primary:hover {
+  background-color: #265a88;
+  box-shadow: 2px 2px 4px #cbcbcb, -2px -2px 4px #ffffff;
+}
+
+.forgot-password {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.forgot-password a {
+  color: #337ab7;
+  text-decoration: none;
+}
+
+.forgot-password a:hover {
+  text-decoration: underline;
 }

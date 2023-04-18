@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
+import img2 from '../../Assest/Login.jpg'
+import "../../CSS/Login.css";
 
-import '../../CSS/Login.css'
-
-function LoginPage() {
-  const [username, setUsername] = useState('');
+function Login() {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
@@ -17,38 +16,49 @@ function LoginPage() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Here you can make an API call to check the validity of the username and password
-    // If they are valid, set isLoggedIn to true
-    setIsLoggedIn(true);
+    console.log(`Email: ${email}, Password: ${password}`);
   };
 
-  // if (isLoggedIn) {
-  //   return (
-  //     <div className="container">
-  //       <h1>Welcome {username}!</h1>
-  //     </div>
-  //   );
-  // }
-
   return (
-    <div className="loginbox">
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Username:
-          <input type="text" value={username} onChange={handleUsernameChange} />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input type="password" value={password} onChange={handlePasswordChange} />
-        </label>
-        <br />
-        <button type="submit">Log In</button>
-      </form>
-    </div>
+    // <div className="App">
+    //   <div className="left">
+    //   <img className="into-img" src={img2} alt="img2"/>
+    //   </div>
+      <div className="right"> 
+        <form onSubmit={handleSubmit}>
+          <h2>Login</h2>
+          <div className="form-group">
+            <label>Email</label>
+            <input
+              type="email"
+              className="form-control"
+              placeholder="Enter email"
+              value={email}
+              onChange={handleEmailChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              className="form-control"
+              placeholder="Enter password"
+              value={password}
+              onChange={handlePasswordChange}
+              required
+            />
+          </div>
+          <button type="submit" className="btn btn-primary btn-block">
+            Sign In
+          </button>
+          <p className="forgot-password text-right">
+            Don't have an account? <a href="/signup">Sign up</a>
+          </p>
+        </form>
+      </div>
+    
   );
 }
 
-export default LoginPage;
-
+export default Login;
